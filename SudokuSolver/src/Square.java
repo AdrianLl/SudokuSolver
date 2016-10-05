@@ -5,11 +5,12 @@ public class Square {
 	private int col;
 	private int quad; // quadrant within puzzle
 	private int val; // value of square
-	private int arrPos; //position within input array
+	// private int arrPos; // position within input array
+
+	// might have to use bool validation for checking
 
 	// Square Constructor
 	public Square(char row, int col) {
-		
 		this.row = row;
 		this.col = col;
 		this.quad = getQuad(row, col);
@@ -17,6 +18,15 @@ public class Square {
 
 	public Square(char row, int col, int val) {
 		this(row, col);
+		this.val = val;
+	}
+
+	public int getVal() {
+		return val;
+	}
+
+	public void setVal(int val) {
+
 		this.val = val;
 	}
 
