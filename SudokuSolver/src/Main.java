@@ -1,27 +1,37 @@
+import java.io.IOException;
 
 public class Main {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws IOException {
 
-		//final int SIZE = 9; //size of sudoku puzzle
+		FileIO values = new FileIO();
+		Board sudoku = new Board();
 
-		//Puzzle[] puzzle;
-		
-		//int puzzleLoc = 0;
-		//Square test =new Square('A',7,1);
-		
-		Board test1 = new Board();
-		
-		test1.setSquare(1, 2);
-		
-		test1.print();
-		
-		
-		
-		
-		
+		//test1.setSquare(1, 1);
 
-		}
+		sudoku.print();
+		
+		
+		sudoku.setSquare(1,1);
+		
+		System.out.println("MOD PUZZLE BELOW");
+		
+		sudoku.print();
+		
+		
+		values.getValues();
+		
+		
+		
+		
+		
+		/*
+		
+		int[] vals = new int[81];
+				
+		values.getValues().clone();
+		*/
+		
 
 	}
+}

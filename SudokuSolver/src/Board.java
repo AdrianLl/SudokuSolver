@@ -38,12 +38,21 @@ public class Board {
 			for (int j = 0; j < 9; j++) {
 
 				this.boardSquares.add(new Square(boardRow[i], boardCol[j]));
+				System.out.print(boardSquares.get(index).toString());
 				System.out.print(" " + boardSquares.get(index).getVal() + " ");
 				index++;
 
 			}
-			System.out.println("\n");
+			System.out.print("\n");
 		}
+	}
+
+	public void fillBoard(int[] values) {
+/*
+		for (int i = 0; i < 81; i++) {
+			values[i] = boardSquares.get(i).setVal(val);
+		}
+*/
 	}
 
 }
