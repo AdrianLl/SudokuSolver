@@ -1,3 +1,12 @@
+/*
+ * Adrian Lliguichuzhca
+ * 
+ * CISC 3410 Program #2
+ * Sudoku Solver with CSP
+ * 
+ */
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -61,6 +70,7 @@ public class Board {
 			System.out.println(this.boardSquares.get(i).getFalseCount());
 		}
 		*/
+		
 		
 	}
 
@@ -213,6 +223,21 @@ public class Board {
 		for(int i = 0 ; i<81; i++){
 			this.boardSquares.get(i).squareValidCountReset();
 		}
+	}
+	
+	public boolean isSolved() {
+
+		boolean solveStatus = true;
+
+		for (int i = 0; i < 81; i++) {
+
+			if (this.boardSquares.get(i).getVal() == 0){
+				return !solveStatus;
+			}
+			
+		}
+		return solveStatus;
+
 	}
 
 }

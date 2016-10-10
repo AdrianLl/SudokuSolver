@@ -1,3 +1,11 @@
+/*
+ * Adrian Lliguichuzhca
+ * 
+ * CISC 3410 Program #2
+ * Sudoku Solver with CSP
+ * 
+ */
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +17,7 @@ public class Main {
 		ArrayList<int[]> allValues = new ArrayList<int[]>();
 		ValuesReader valueIntake = new ValuesReader();
 		String[] valueString = Arrays.copyOf(valueIntake.readLines("res/sudokus.txt"), 500);
+		int solvedCounter=0;
 		
 		for (int k = 0; k < 500; k++) {
 			int tempArr[] = new int[81];
@@ -21,27 +30,34 @@ public class Main {
 		}
 		
 		
-		
-		
+		for(int puzzleCount = 0; puzzleCount<500;puzzleCount++){
+			
+			Board sudoku = new Board();
 
-		//FileIO values = new FileIO();
-		Board sudoku = new Board();
-		//int sudokuValues[] = Arrays.copyOf(values.getValues(), 81);
-
-		int counter= 0;
-		
-		sudoku.fillBoard(allValues.get(0));
-		sudoku.boardValidation();
-		sudoku.checkSolvable();
-		
-		while(counter<50){
-			sudoku.boardUpdate();
+			int counter= 0;
+			
+			
+			sudoku.fillBoard(allValues.get(puzzleCount));
+			sudoku.boardValidation();
 			sudoku.checkSolvable();
-			counter++;
+			
+			while(counter<50){
+				sudoku.boardUpdate();
+				sudoku.checkSolvable();
+				counter++;
+			}
+			
+			
+			if(sudoku.isSolved()){
+				solvedCounter++;
+			System.out.println("\n Solved Sudoku Puzzle " + puzzleCount+ "\n");
+			sudoku.print();
+			}
+			
 		}
 		
-		System.out.println("\n Solved Sudoku 1 \n");
-		sudoku.print();
+		System.out.println("Number of solved Puzzles: "+ solvedCounter);
+		
 		
 	}
 }

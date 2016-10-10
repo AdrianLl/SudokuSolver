@@ -1,3 +1,11 @@
+/*
+ * Adrian Lliguichuzhca
+ * 
+ * CISC 3410 Program #2
+ * Sudoku Solver with CSP
+ * 
+ */
+
 import java.util.Arrays;
 
 public class Square {
