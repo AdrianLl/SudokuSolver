@@ -72,6 +72,7 @@ public class Board {
 		*/
 		
 		
+		
 	}
 
 	public void fillBoard(int[] values) {
@@ -95,17 +96,13 @@ public class Board {
 				this.squareValidation(i);
 			}
 		}
-
-	}
-	
-	public void boardUpdate(){
-		
-		for (int i = 0; i < 81; i++) {
-			if (this.boardSquares.get(i).getVal() == 0) {
-				this.updateValidation(i);
-			}
+		for (int j = 0; j < 9; j++) {
+			this.rowValidation(j);
 		}
 		
+		for (int k = 0; k < 9; k++) {
+			this.colValidation(k);
+		}
 	}
 
 	public void squareValidation(int squareNumber) {
@@ -149,50 +146,108 @@ public class Board {
 
 	}
 	
-	public void updateValidation(int squareNumber) {
+	public void rowValidation(int rNumber) {
 
-		List<Integer> givenValues = new ArrayList<>(); // all given values row
-		Set<Integer> uniqueValues = new HashSet<>(); // only unique values
-		char squareRow = this.boardSquares.get(squareNumber).getRow();
-		int squareCol = this.boardSquares.get(squareNumber).getCol();
-		int squareQuad = this.boardSquares.get(squareNumber).getQuad();
+		int rMin = rNumber * 9;
+		int rMax = rNumber * 9 + 9;
 
-		for (int i = 0; i < 81; i++) {
+		List<Integer> rowValues = new ArrayList<>(); // all given values row
+		Set<Integer> uniqueRowValues = new HashSet<>(); // only unique values
 
-			int squareVal = this.boardSquares.get(i).getVal();
-			char squareRowCheck = this.boardSquares.get(i).getRow();
-			int squareColCheck = this.boardSquares.get(i).getCol();
-			int squareQuadCheck = this.boardSquares.get(i).getQuad();
+		for (int i = rMin; i < rMax; i++) {
 
-			if (squareVal == 0) {
-				continue;
-			} else {
-				if (squareRow == squareRowCheck) {
-					givenValues.add(squareVal);
-				} else if (squareCol == squareColCheck) {
-					givenValues.add(squareVal);
-				} else if (squareQuad == squareQuadCheck) {
-					givenValues.add(squareVal);
-				}
+			int value = this.boardSquares.get(i).getVal();
+
+			if (value != 0) {
+
+				rowValues.add(value);
+
 			}
+
+		}
+		if (!rowValues.isEmpty()) {
+			uniqueRowValues.addAll(rowValues);
+			rowValues.clear();
+			rowValues.addAll(uniqueRowValues);
 		}
 
-		if (!givenValues.isEmpty()) {
-			uniqueValues.addAll(givenValues);
-			givenValues.clear();
-			givenValues.addAll(uniqueValues);
-		}
+		for (int i = rMin; i < rMax; i++) {
 
-		// boolean vals[] =
-		// Arrays.copyOf(this.boardSquares.get(squareNumber).getPossibleVal(),
-		// 10);
+			for (int k = 0; k < rowValues.size(); k++) {
+				this.boardSquares.get(i).validationUpdate(rowValues.get(k));
+			}
 
-		for (int k = 0; k < givenValues.size(); k++) {
-			this.boardSquares.get(squareNumber).validationReUpdate(givenValues.get(k));
 		}
 
 	}
-		
+	
+	public void colValidation(int cNumber) {
+
+		int cols[] = { 0, 9, 18, 27, 36, 45, 54, 63, 72 };
+
+		List<Integer> colValues = new ArrayList<>(); // all given values row
+		Set<Integer> uniqueColValues = new HashSet<>(); // only unique values
+
+		for (int i = 0; i < 9; i++) {
+
+			int value = this.boardSquares.get((cols[i] + cNumber)).getVal();
+
+			if (value != 0) {
+
+				colValues.add(value);
+
+			}
+
+		}
+		if (!colValues.isEmpty()) {
+			uniqueColValues.addAll(colValues);
+			colValues.clear();
+			colValues.addAll(uniqueColValues);
+		}
+
+		for (int j = 0; j < 9; j++) {
+
+			for (int k = 0; k < colValues.size(); k++) {
+				this.boardSquares.get((cols[j] + cNumber)).validationUpdate(colValues.get(k));
+			}
+
+		}
+
+	}
+	
+	public void quadValidation(int cNumber) {
+
+		int cols[] = { 0, 1, 2, 9, 10, 11, 18, 19, 20 };
+
+		List<Integer> colValues = new ArrayList<>(); // all given values row
+		Set<Integer> uniqueColValues = new HashSet<>(); // only unique values
+
+		for (int i = 0; i < 9; i++) {
+
+			int value = this.boardSquares.get((cols[i] + cNumber)).getVal();
+
+			if (value != 0) {
+
+				colValues.add(value);
+
+			}
+
+		}
+		if (!colValues.isEmpty()) {
+			uniqueColValues.addAll(colValues);
+			colValues.clear();
+			colValues.addAll(uniqueColValues);
+		}
+
+		for (int j = 0; j < 9; j++) {
+
+			for (int k = 0; k < colValues.size(); k++) {
+				this.boardSquares.get((cols[j] + cNumber)).validationUpdate(colValues.get(k));
+			}
+
+		}
+
+	}
 	
 	public void checkSolvable() {
 		// List<Integer> indexSolvable = new ArrayList<>();

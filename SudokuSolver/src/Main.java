@@ -42,7 +42,7 @@ public class Main {
 			sudoku.checkSolvable();
 			
 			while(counter<50){
-				sudoku.boardUpdate();
+				sudoku.boardValidation();
 				sudoku.checkSolvable();
 				counter++;
 			}

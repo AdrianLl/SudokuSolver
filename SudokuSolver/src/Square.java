@@ -51,35 +51,35 @@ public class Square {
 
 	public int getQuad(char row, int col) {
 
-		int Quadrant = 0; // no quadrant given yet
+		int Quadrant=0; // no quadrant given yet
 
 		if (row == 'A' || row == 'B' || row == 'C') {
 			if (col >= 1 && col <= 3) {
-				Quadrant = 1;
+				Quadrant = 0;
 			} else if (col >= 4 && col <= 6) {
-				Quadrant = 2;
+				Quadrant = 1;
 			} else if (col >= 7 && col <= 9) {
-				Quadrant = 3;
+				Quadrant = 2;
 			}
 		}
 
 		if (row == 'D' || row == 'E' || row == 'F') {
 			if (col >= 1 && col <= 3) {
-				Quadrant = 4;
+				Quadrant = 3;
 			} else if (col >= 4 && col <= 6) {
-				Quadrant = 5;
+				Quadrant = 4;
 			} else if (col >= 7 && col <= 9) {
-				Quadrant = 6;
+				Quadrant = 5;
 			}
 		}
 
 		if (row == 'G' || row == 'H' || row == 'I') {
 			if (col >= 1 && col <= 3) {
-				Quadrant = 7;
+				Quadrant = 6;
 			} else if (col >= 4 && col <= 6) {
-				Quadrant = 8;
+				Quadrant = 7;
 			} else if (col >= 7 && col <= 9) {
-				Quadrant = 9;
+				Quadrant = 8;
 			}
 		}
 
@@ -100,13 +100,8 @@ public class Square {
 		this.possibleVal[givenNum] = true;
 		this.falseCount=9;
 	}
-
-	public void validationUpdate(int num) {
-		this.possibleVal[num] = false;
-		this.falseCount++;
-	}
 	
-	public void validationReUpdate(int num) {
+	public void validationUpdate(int num) {
 		if (this.possibleVal[num] == true) {
 			this.possibleVal[num] = false;
 			this.falseCount++;
