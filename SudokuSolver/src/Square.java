@@ -97,6 +97,13 @@ public class Square {
 		this.possibleVal[num] = false;
 		this.falseCount++;
 	}
+	
+	public void validationReUpdate(int num) {
+		if (this.possibleVal[num] == true) {
+			this.possibleVal[num] = false;
+			this.falseCount++;
+		}
+	}
 
 	public String toString() {
 		return " L" + row + col + "Q" + quad + "V" + val + " ";
@@ -132,6 +139,10 @@ public class Square {
 
 	public void setPossibleVal(boolean[] possibleVal) {
 		this.possibleVal = possibleVal;
+	}
+	
+	public void squareValidCountReset(){
+		this.falseCount = 0;
 	}
 
 }

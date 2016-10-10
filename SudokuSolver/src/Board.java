@@ -61,6 +61,7 @@ public class Board {
 			System.out.println(this.boardSquares.get(i).getFalseCount());
 		}
 		*/
+		
 	}
 
 	public void fillBoard(int[] values) {
@@ -86,11 +87,61 @@ public class Board {
 		}
 
 	}
+	
+	public void boardUpdate(){
+		
+		for (int i = 0; i < 81; i++) {
+			if (this.boardSquares.get(i).getVal() == 0) {
+				this.updateValidation(i);
+			}
+		}
+		
+	}
 
 	public void squareValidation(int squareNumber) {
 
 		List<Integer> givenValues = new ArrayList<>(); // all given values row
-														// col quad
+		Set<Integer> uniqueValues = new HashSet<>(); // only unique values
+		char squareRow = this.boardSquares.get(squareNumber).getRow();
+		int squareCol = this.boardSquares.get(squareNumber).getCol();
+		int squareQuad = this.boardSquares.get(squareNumber).getQuad();
+
+		for (int i = 0; i < 81; i++) {
+
+			int squareVal = this.boardSquares.get(i).getVal();
+			char squareRowCheck = this.boardSquares.get(i).getRow();
+			int squareColCheck = this.boardSquares.get(i).getCol();
+			int squareQuadCheck = this.boardSquares.get(i).getQuad();
+
+			if (squareVal == 0) {
+				continue;
+			} else {
+				if (squareRow == squareRowCheck) {
+					givenValues.add(squareVal);
+				} else if (squareCol == squareColCheck) {
+					givenValues.add(squareVal);
+				} else if (squareQuad == squareQuadCheck) {
+					givenValues.add(squareVal);
+				}
+			}
+		}
+
+		// given values now has all non possible iterations
+		if (!givenValues.isEmpty()) {
+			uniqueValues.addAll(givenValues);
+			givenValues.clear();
+			givenValues.addAll(uniqueValues);
+		}
+
+		for (int k = 0; k < givenValues.size(); k++) {
+			this.boardSquares.get(squareNumber).validationUpdate(givenValues.get(k));
+		}
+
+	}
+	
+	public void updateValidation(int squareNumber) {
+
+		List<Integer> givenValues = new ArrayList<>(); // all given values row
 		Set<Integer> uniqueValues = new HashSet<>(); // only unique values
 		char squareRow = this.boardSquares.get(squareNumber).getRow();
 		int squareCol = this.boardSquares.get(squareNumber).getCol();
@@ -122,13 +173,16 @@ public class Board {
 			givenValues.addAll(uniqueValues);
 		}
 
+		// boolean vals[] =
+		// Arrays.copyOf(this.boardSquares.get(squareNumber).getPossibleVal(),
+		// 10);
+
 		for (int k = 0; k < givenValues.size(); k++) {
-
-			this.boardSquares.get(squareNumber).validationUpdate(givenValues.get(k));
-
+			this.boardSquares.get(squareNumber).validationReUpdate(givenValues.get(k));
 		}
 
 	}
+		
 	
 	public void checkSolvable() {
 		// List<Integer> indexSolvable = new ArrayList<>();
@@ -141,8 +195,9 @@ public class Board {
 				for (int k = 1; k < 10; k++) {
 					if (vals[k]) {
 						index = k;
-						this.boardSquares.get(i).validationUpdate(index);
 						this.boardSquares.get(i).setVal(index);
+						this.boardSquares.get(i).validationUpdate(0);
+						
 						
 						break;
 					}
@@ -153,6 +208,11 @@ public class Board {
 		}
 	}
 
-	// create function to test possibilities left over in puzzle.**********
+	public void validationReset(){
+		
+		for(int i = 0 ; i<81; i++){
+			this.boardSquares.get(i).squareValidCountReset();
+		}
+	}
 
 }
