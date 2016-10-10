@@ -29,7 +29,7 @@ public class Main {
 			allValues.add(tempArr);
 		}
 		
-		
+		/*
 		for(int puzzleCount = 0; puzzleCount<500;puzzleCount++){
 			
 			Board sudoku = new Board();
@@ -54,6 +54,35 @@ public class Main {
 			sudoku.print();
 			}
 			
+		}
+		*/
+		
+		Board sudoku = new Board();
+
+		int counter= 0;
+		
+		
+		sudoku.fillBoard(allValues.get(0));
+		sudoku.print();
+		sudoku.boardValidation();
+		
+		
+		sudoku.checkSolvable();
+		
+		while(counter<50){
+			sudoku.boardValidation();
+			sudoku.checkSolvable();
+			counter++;
+		}
+		
+		System.out.println("\n UPDATED PUZZLE\n");
+		sudoku.print();
+		
+		
+		if(sudoku.isSolved()){
+			solvedCounter++;
+		System.out.println("\n Solved Sudoku Puzzle \n");
+		sudoku.print();
 		}
 		
 		System.out.println("Number of solved Puzzles: "+ solvedCounter);

@@ -107,6 +107,13 @@ public class Square {
 			this.falseCount++;
 		}
 	}
+	
+	public void valueUpdateFinal(int num){
+		this.setVal(num);
+		this.setFalseCount(10);
+		Arrays.fill(this.possibleVal, false);
+		
+	}
 
 	public String toString() {
 		return " L" + row + col + "Q" + quad + "V" + val + " ";
