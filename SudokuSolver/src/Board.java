@@ -141,7 +141,7 @@ public class Board {
 				for (int k = 1; k < 10; k++) {
 					if (vals[k]) {
 						index = k;
-						//this.boardSquares.get(i).validationUpdate(index);
+						this.boardSquares.get(i).validationUpdate(index);
 						this.boardSquares.get(i).setVal(index);
 						
 						break;
