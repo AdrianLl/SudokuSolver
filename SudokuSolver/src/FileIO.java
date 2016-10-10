@@ -33,10 +33,6 @@ public class FileIO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		
-		System.out.println(nums[2]);
-		
 		return nums;		
 		
 	}

@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Square {
 
@@ -5,15 +6,25 @@ public class Square {
 	private int col;
 	private int quad; // quadrant within puzzle
 	private int val; // value of square
-	// private int arrPos; // position within input array
-
-	// might have to use bool validation for checking
+	private boolean possibleVal[] = new boolean[10]; // 0-9 possible or not
+	private int falseCount;
 
 	// Square Constructor
 	public Square(char row, int col) {
 		this.row = row;
 		this.col = col;
 		this.quad = getQuad(row, col);
+		Arrays.fill(this.possibleVal, true);
+		this.falseCount=0;
+
+	}
+
+	public int getFalseCount() {
+		return falseCount;
+	}
+
+	public void setFalseCount(int falseCount) {
+		this.falseCount = falseCount;
 	}
 
 	public Square(char row, int col, int val) {
@@ -68,8 +79,59 @@ public class Square {
 
 	}
 
+	/**
+	 * This function will be used when loading given values at the beginning.
+	 * The given num will eliminate all other num possibilities. Only used to
+	 * initialize the given values.
+	 * 
+	 * @param givenNum
+	 *            given number that will be entered in a given square
+	 */
+	public void givenValue(int givenNum) {
+		Arrays.fill(this.possibleVal, false);
+		this.possibleVal[givenNum] = true;
+		this.falseCount=9;
+	}
+
+	public void validationUpdate(int num) {
+		this.possibleVal[num] = false;
+		this.falseCount++;
+	}
+
 	public String toString() {
 		return " L" + row + col + "Q" + quad + "V" + val + " ";
+	}
+
+	public char getRow() {
+		return row;
+	}
+
+	public void setRow(char row) {
+		this.row = row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
+	}
+
+	public int getQuad() {
+		return quad;
+	}
+
+	public void setQuad(int quad) {
+		this.quad = quad;
+	}
+
+	public boolean[] getPossibleVal() {
+		return possibleVal;
+	}
+
+	public void setPossibleVal(boolean[] possibleVal) {
+		this.possibleVal = possibleVal;
 	}
 
 }

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Main {
 
@@ -6,32 +7,13 @@ public class Main {
 
 		FileIO values = new FileIO();
 		Board sudoku = new Board();
+		int sudokuValues[] = Arrays.copyOf(values.getValues(), 81);
 
-		//test1.setSquare(1, 1);
-
+		sudoku.fillBoard(sudokuValues);
+		sudoku.boardValidation();
 		sudoku.print();
-		
-		
-		sudoku.setSquare(1,1);
-		
-		System.out.println("MOD PUZZLE BELOW");
-		
+		System.out.println("\n UPDATED SUDOKU \n");
+		sudoku.checkSolvable();
 		sudoku.print();
-		
-		
-		values.getValues();
-		
-		
-		
-		
-		
-		/*
-		
-		int[] vals = new int[81];
-				
-		values.getValues().clone();
-		*/
-		
-
 	}
 }
